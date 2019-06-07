@@ -26,7 +26,6 @@ router.post('/actions', (req, res) => {
 })
 
 router.get('/projects/:id', (req, res) => {
-  console.log(req.params.id)
 
   Projects
     .getProject(req.params.id)
