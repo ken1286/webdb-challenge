@@ -7,7 +7,12 @@ const db = knex(knexConfig.development);
 module.exports = {
   addProject,
   addAction,
-  getProject
+  getProject,
+  removeProject,
+  removeAction,
+  getProjects,
+  getActions,
+  getAction
 };
 
 async function getProject(id) {
@@ -37,3 +42,31 @@ function addAction(action) {
   return db('actions')
     .insert(action);
 };
+
+function removeProject(id) {
+  return db('projects')
+    .where('id', id)
+    .del();
+};
+
+function removeAction(id) {
+  return db('actions')
+    .where('id', id)
+    .del();
+};
+
+function getProjects() {
+  return db('projects');
+}
+
+function getActions() {
+  return db('actions')
+  .join('projects', 'projects.id', 'actions.project_id')
+  .select('actions.*', 'projects.name as projectName')
+}
+
+function getAction(id) {
+  return db('actions')
+  .where('id', id)
+  .first()
+}
