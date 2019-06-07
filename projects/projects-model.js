@@ -57,16 +57,16 @@ function removeAction(id) {
 
 function getProjects() {
   return db('projects');
-}
+};
 
 function getActions() {
   return db('actions')
   .join('projects', 'projects.id', 'actions.project_id')
   .select('actions.*', 'projects.name as projectName')
-}
+};
 
 function getAction(id) {
   return db('actions')
   .where('id', id)
   .first()
-}
+};
